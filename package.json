@@ -25,7 +25,9 @@
   "keywords": [
     "stylus",
     "lcars",
-    "design system"
+    "lcars-style",
+    "lcars-interface",
+    "design-system"
   ],
   "peerDependencies": {
     "stylus": "*"
