@@ -5,6 +5,7 @@
   "packageManager": "pnpm@10.17.0",
   "main": "index.styl",
   "type": "module",
+  "license": "MIT",
   "author": {
     "name": "Adam Matthiesen",
     "url": "https://matthiesen.dev"
