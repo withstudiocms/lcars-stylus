@@ -1,43 +1,78 @@
-# Astro Starter Kit: Minimal
+# LCARS Design system for Stylus
+
+LCARS is a purely CSS and HTML framework, similar to Bootstrap, Foundation, Topcoat, Brick, or Pure to create user interfaces similiar to a certain popular sci-fi franchise. There are a few requirements in terms of HTML element nesting and corresponding CSS classes that are necessary for the styling to apply correctly, please checkout our example theme for details about how to implement this.
+
+## Requirements
+
+- Stylus
+- LCARS GTJ3 font - [Available Here](https://gtjlcars.de/LCARSindex/LCARSFONTS.htm)
+
+## Usage
+
+### Basic Usage in Astro
+
+#### Ensure Stylus is installed
 
 ```sh
-pnpm create astro@latest -- --template minimal
+npm install stylus
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+### Font Setup with Astro Fonts
 
-## 🚀 Project Structure
+In your Astro config file ensure you download the font above, and add it using the following example:
 
-Inside of your Astro project, you'll see the following folders and files:
+```ts
+import { defineConfig, fontProviders } from 'astro/config';
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+// https://astro.build/config
+export default defineConfig({
+    fonts: [{
+        // https://gtjlcars.de/LCARSindex/LCARSFONTS.htm
+        provider: fontProviders.local(),
+        name: "LCARSGTJ3",
+        cssVariable: "--font-lcarsgtj3",
+        weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
+        display: 'swap',
+        options: {
+            variants: [{
+                src: ['./src/assets/fonts/LCARSGTJ3.woff2'],
+                weight: "100 900",
+                style: 'normal',
+                display: 'swap'
+            }]
+        }
+    }]
+});
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+If you are not using Astro, the important thing here is to ensure the font is loaded, and available to the application as the `--font-lcarsgtj3` css variable.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+#### Add to your Layout
 
-Any static assets, like images, can be placed in the `public/` directory.
+In your `Layout.astro`
 
-## 🧞 Commands
+```astro
+---
+import "@withstudiocms/lcars-stylus/index.styl";
+import { Font } from "astro:assets";
+---
+<html>
+    <head>
+        <!-- Head content here -->
+        <Font cssVariable="--font-lcarsgtj3" preload />
+    </head>
+    <body>
+        <!-- Body content here -->
+    </body>
+</html>
+```
 
-All commands are run from the root of the project, from a terminal:
+### Checkout the Example project for usage examples
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+Checkout the main Example theme built with Astro for how to work with this project.
 
-## 👀 Want to learn more?
+## Licensing
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+MIT Licensed 2026-Present
+
+LCARS is a copyright of CBS Studios INC. and Star Trek. All rights reserved. This project is not endorsed or affiliated with CBS or Star Trek in any way, this is a fan project meant solely for fun!

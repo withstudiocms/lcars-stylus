@@ -8,6 +8,10 @@
     "name": "Adam Matthiesen",
     "url": "https://matthiesen.dev"
   },
+  "exports": {
+    ".": "./index.styl",
+    "./*.styl": "./*.styl"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/withstudiocms/lcars-stylus.git"
