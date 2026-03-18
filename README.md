@@ -71,6 +71,8 @@ import { Font } from "astro:assets";
 
 Checkout the main Example theme built with Astro for how to work with this project.
 
+- TODO: Add link once ready
+
 ## Licensing
 
 MIT Licensed 2026-Present
