@@ -1,0 +1,27 @@
+{
+  "name": "@withstudiocms/lcars-stylus",
+  "version": "1.0.0",
+  "description": "LCARS-inspired stylus Design System",
+  "packageManager": "pnpm@10.17.0",
+  "main": "index.styl",
+  "author": {
+    "name": "Adam Matthiesen",
+    "url": "https://matthiesen.dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/withstudiocms/lcars-stylus.git"
+  },
+  "bugs": {
+    "url": "https://github.com/withstudiocms/lcars-stylus/issues"
+  },
+  "homepage": "https://astro-lcars.cloud",
+  "keywords": [
+    "stylus",
+    "lcars",
+    "design system"
+  ],
+  "peerDependencies": {
+    "stylus": "*"
+  }
+}
