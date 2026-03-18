@@ -1,7 +1,7 @@
 {
   "name": "@withstudiocms/lcars-stylus",
   "version": "1.0.0",
-  "description": "LCARS-inspired stylus Design System",
+  "description": "LCARS inspired design system built with Stylus",
   "packageManager": "pnpm@10.17.0",
   "main": "index.styl",
   "type": "module",
