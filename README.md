@@ -1,6 +1,6 @@
 # LCARS Design system for Stylus
 
-LCARS is a purely CSS and HTML framework, similar to Bootstrap, Foundation, Topcoat, Brick, or Pure to create user interfaces similiar to a certain popular sci-fi franchise. There are a few requirements in terms of HTML element nesting and corresponding CSS classes that are necessary for the styling to apply correctly, please checkout our example theme for details about how to implement this.
+LCARS is a purely CSS and HTML framework, similar to Bootstrap, Foundation, Topcoat, Brick, or Pure to create user interfaces similar to a certain popular sci-fi franchise. There are a few requirements in terms of HTML element nesting and corresponding CSS classes that are necessary for the styling to apply correctly, please checkout our example theme for details about how to implement this.
 
 ## Requirements
 
