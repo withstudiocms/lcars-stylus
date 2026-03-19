@@ -56,7 +56,10 @@ In your `Layout.astro`
 
 ```astro
 ---
+import "@withstudiocms/lcars-stylus"; 
+// OR
 import "@withstudiocms/lcars-stylus/index.styl";
+
 import { Font } from "astro:assets";
 ---
 <html>
