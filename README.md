@@ -78,6 +78,6 @@ Checkout the main Example theme built with Astro for how to work with this proje
 
 ## Licensing
 
-MIT Licensed 2026-Present
+MIT Licensed 2026-Present - withstudiocms
 
 LCARS is a copyright of CBS Studios INC. and Star Trek. All rights reserved. This project is not endorsed or affiliated with CBS or Star Trek in any way, this is a fan project meant solely for fun!
