@@ -10,6 +10,12 @@
     "name": "Adam Matthiesen",
     "url": "https://matthiesen.dev"
   },
+  "files": [
+    "index.styl",
+    "lib",
+    "LICENSE",
+    "README.md"
+  ],
   "exports": {
     ".": "./index.styl",
     "./*.styl": "./*.styl"
