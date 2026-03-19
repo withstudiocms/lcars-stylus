@@ -77,7 +77,7 @@ import { Font } from "astro:assets";
 
 Checkout the main Example theme built with Astro for how to work with this project.
 
-- TODO: Add link once ready
+- [Astro-LCARS theme](https://github.com/withstudiocms/astro-lcars)
 
 ## Licensing
 
