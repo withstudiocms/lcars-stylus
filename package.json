@@ -10,6 +10,9 @@
     "name": "Adam Matthiesen",
     "url": "https://matthiesen.dev"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "index.styl",
     "lib",
