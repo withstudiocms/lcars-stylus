@@ -1,5 +1,7 @@
 # LCARS Design system for Stylus
 
+[![NPM Version](https://img.shields.io/npm/v/@withstudiocms/lcars-stylus)](https://npm.im/@withstudiocms/lcars-stylus)
+
 LCARS is a purely CSS and HTML framework, similar to Bootstrap, Foundation, Topcoat, Brick, or Pure to create user interfaces similar to a certain popular sci-fi franchise. There are a few requirements in terms of HTML element nesting and corresponding CSS classes that are necessary for the styling to apply correctly, please checkout our example theme for details about how to implement this.
 
 ## Requirements
