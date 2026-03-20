@@ -82,3 +82,21 @@ export type TextBoxPositionsBase = "right" | "centered";
  * Defines a type for text box positions in the LCARS-themed website, which includes base positions (right and centered) as well as combinations of vertical and horizontal positions (e.g., bottom-right, full-centered), providing a comprehensive set of options for positioning text boxes within the layout while maintaining consistency with the LCARS design aesthetic.
  */
 export type TextBoxPositions = TextBoxPositionsBase | "bottom" | `bottom-${TextBoxPositionsBase}` | "full-centered" | "centered-right";
+
+/**
+ * Represents a navigation item in the LCARS-themed website. Each item has a text label, a hyperlink reference, a unique key for identification, and a color from the LCARS color palette.
+ */
+export type NavigationItem = {
+    text: string;
+    href: string;
+    key: string;
+    color?: LcarsColorway;
+};
+
+/**
+ * Represents a copyright tagline in the LCARS-themed website, consisting of a preamble (e.g., "© 2024") and a company name, which can be used to display copyright information in the footer or other relevant sections of the website while maintaining the LCARS design aesthetic.
+ */
+export type CopyrightTagline = {
+    preamble: string;
+    company: string;
+}

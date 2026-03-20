@@ -1,0 +1,116 @@
+---
+import LElement from "../components/LElement.astro";
+import { CopyrightTagline, NavigationItem } from "../types";
+import LCARSAudio from "../utility/LCARSAudio.astro";
+import LCARSColorFix from "../utility/LCARSColorFix.astro";
+import LCARSLoading from "../utility/LCARSLoading.astro";
+
+interface Props {
+    siteTitle: string;
+    key: string;
+    navigation: NavigationItem[];
+    copyright: CopyrightTagline;
+    externalLink: {
+        text: string;
+        href: string;
+    }
+}
+
+const { siteTitle, key, navigation, copyright, externalLink } = Astro.props;
+---
+
+<div class="lcars-app-container">
+    {/* Header/Top bar */}
+    <div id="header" class="lcars-row header">
+        {/* ELBOW */}
+        <div class="lcars-elbow left-bottom"></div>
+
+        {/* BAR WITH TITLE */}
+        <div class="lcars-bar horizontal">
+            <div class="lcars-title right">{siteTitle}</div>
+        </div>
+
+        {/* ROUNDED EDGE DECORATED */}
+        <div class="lcars-bar horizontal right-end decorated"></div>
+    </div>
+
+    {/* Left Sidebar */}
+    <div
+        id="left-menu"
+        class="lcars-column start-space lcars-u-1"
+        style="text-transform: uppercase;"
+    >
+        {/* Primary Navigation Links */}
+        {
+            navigation.map((navItem) => (
+                <a href={key === navItem.key ? undefined : navItem.href}>
+                    <LElement
+                        color={navItem.color || "golden-tanoi"}
+                        button
+                        classList={
+                            key === navItem.key ? "nav active" : "nav"
+                        }
+                    >
+                        {navItem.text}
+                    </LElement>
+                </a>
+            ))
+        }
+
+        {
+            externalLink ? (
+                <div class="lcars-bar fill lcars-u-1"></div>
+                <div class="lcars-bar spacer"></div>
+                <a href={externalLink.href} target="_blank">
+                    <LElement button classList="nav" color="atomic-tangerine">
+                        {externalLink.text}
+                    </LElement>
+                </a>
+                <div class="lcars-bar lock-bottom lcars-u-1"></div>
+            ) : (
+                <div class="lcars-bar lcars-u-1"></div>
+            )
+        }
+    </div>
+
+    {/* Footer */}
+    <div id="footer" class="lcars-row">
+        {/* ELBOW */}
+        <div class="lcars-elbow left-top"></div>
+        {/* BAR */}
+        <div class="lcars-bar horizontal both-divider bottom">
+            <div class="lcars-copy left">
+                {copyright.preamble}
+                {new Date().getFullYear()} - {copyright.company}.
+            </div>
+            <div class="lcars-copy right">
+                LCARS is a copyright of CBS Studios INC. All rights reserved.
+                This website is not affiliated with or endorsed by CBS in any
+                way.
+            </div>
+        </div>
+        {/* ROUNDED EDGE */}
+        <div class="lcars-bar horizontal right-end left-divider bottom"></div>
+    </div>
+
+    <LCARSLoading />
+
+    {/* Main Content Container */}
+    <div id="container">
+        <slot />
+    </div>
+</div>
+<LCARSAudio />
+<LCARSColorFix />
+
+<script is:inline>
+    function ready() {
+        setTimeout(() => {
+            const app = document.querySelector(".lcars-app-container");
+            app?.classList.add("is-ready");
+            lcarsAudio.Ready();
+        }, 250);
+    }
+
+    document.addEventListener("DOMContentLoaded", ready);
+</script>
