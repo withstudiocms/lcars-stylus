@@ -2,6 +2,12 @@
 import TextBox from "../components/TextBox.astro";
 import { selectRandom } from "../helpers";
 
+interface Props {
+    customMessages?: string[];
+}
+
+const { customMessages } = Astro.props;
+
 /**
  * A collection of LCARS-themed loading messages that can be randomly selected to provide a dynamic and engaging user experience while the system is initializing or processing data, enhancing the overall immersion and thematic consistency of the LCARS design aesthetic.
  */
@@ -35,7 +41,9 @@ export const RANDOM_LCARS_LOADING_MESSAGES = [
     "FINALIZING USER INTERFACE...",
 ];
 
-const message = selectRandom(RANDOM_LCARS_LOADING_MESSAGES);
+const message = selectRandom(
+    customMessages ? customMessages : RANDOM_LCARS_LOADING_MESSAGES,
+);
 ---
 
 <div id="loading-screen" class="overlay">

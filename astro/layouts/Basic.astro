@@ -7,6 +7,7 @@ import Elbow from "../components/Elbow.astro";
 import LElement from "../components/LElement.astro";
 import Row from "../components/Row.astro";
 import { LCARSAudio, LCARSColorFix, LCARSLoading } from "../utility/index";
+import { ComponentProps } from "astro/types";
 
 interface Props {
     siteTitle: string;
@@ -17,9 +18,11 @@ interface Props {
         text: string;
         href: string;
     }
+    audioConfig?: ComponentProps<typeof LCARSAudio>;
+    loadingConfig?: ComponentProps<typeof LCARSLoading>;
 }
 
-const { siteTitle, key, navigation, copyright, externalLink } = Astro.props;
+const { siteTitle, key, navigation, copyright, externalLink, audioConfig, loadingConfig } = Astro.props;
 ---
 
 {/* Main App Container */}
@@ -87,7 +90,7 @@ const { siteTitle, key, navigation, copyright, externalLink } = Astro.props;
         <Bar horizontal rightEnd leftDivider bottom />
     </Row>
 
-    <LCARSLoading />
+    <LCARSLoading {...loadingConfig} />
 
     {/* Main Content Container */}
     <div id="container">
@@ -96,7 +99,7 @@ const { siteTitle, key, navigation, copyright, externalLink } = Astro.props;
 </div>
 
 {/* Utility Components */}
-<LCARSAudio />
+<LCARSAudio {...audioConfig} />
 <LCARSColorFix />
 
 {/* Loading Script */}
