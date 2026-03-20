@@ -1,5 +1,5 @@
 ---
-import type { CopyrightTagline, NavigationItem } from "../types";
+import type { CopyrightTagline, HorizontalPositions, NavigationItem } from "../types";
 import Bar from "../components/Bar.astro";
 import BarTitle from "../components/BarTitle.astro";
 import Column from "../components/Column.astro";
@@ -14,6 +14,7 @@ interface Props {
     key: string;
     navigation: NavigationItem[];
     copyright: CopyrightTagline;
+    titlePosition?: HorizontalPositions;
     externalLink?: {
         text: string;
         href: string;
@@ -22,7 +23,7 @@ interface Props {
     loadingConfig?: ComponentProps<typeof LCARSLoading>;
 }
 
-const { siteTitle, key, navigation, copyright, externalLink, audioConfig, loadingConfig } = Astro.props;
+const { siteTitle, key, navigation, copyright, externalLink, audioConfig, loadingConfig, titlePosition = "right" } = Astro.props;
 ---
 
 {/* Main App Container */}
@@ -31,7 +32,7 @@ const { siteTitle, key, navigation, copyright, externalLink, audioConfig, loadin
     <Row id="header" header>
         <Elbow position="left-bottom" />
         <Bar horizontal>
-            <BarTitle position="right">{siteTitle}</BarTitle>
+            <BarTitle position={titlePosition}>{siteTitle}</BarTitle>
         </Bar>
         <Bar horizontal rightEnd decorated />
     </Row>
