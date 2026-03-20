@@ -1,0 +1,21 @@
+---
+import { XYPositions } from "./types";
+
+interface Props {
+    /**
+     * Determines the position of the bracket within its container. This can be used to align the bracket to the left, right, top, or bottom, depending on the desired layout and design. Proper positioning can enhance readability and visual appeal, as well as create a sense of balance and harmony within the overall design.
+     */
+    position: XYPositions;
+
+    /**
+     * Applies a hollow style to the bracket, which typically involves using an outline or border to create the shape of the bracket while leaving the interior transparent. This can be used to create a more visually interesting and dynamic design, as well as to allow for background elements to show through the bracket. The hollow style can be particularly effective when used in combination with other design elements, such as color or texture, to create a unique and engaging visual effect.
+     */
+    hollow?: boolean;
+}
+
+const { position, hollow } = Astro.props;
+---
+
+<div class:list={["lcars-bracket", position, hollow && "hollow"]}>
+    <slot />
+</div>

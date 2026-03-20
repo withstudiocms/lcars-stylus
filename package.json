@@ -14,6 +14,7 @@
     "access": "public"
   },
   "files": [
+    "astro",
     "index.styl",
     "lib",
     "LICENSE",
@@ -21,7 +22,8 @@
   ],
   "exports": {
     ".": "./index.styl",
-    "./*.styl": "./*.styl"
+    "./*.styl": "./*.styl",
+    "./astro/*": "./astro/*"
   },
   "repository": {
     "type": "git",
@@ -58,6 +60,15 @@
     "pkg-pr-new": "^0.0.65"
   },
   "peerDependencies": {
+    "astro": "^6.0.0",
     "stylus": "*"
+  },
+  "peerDependenciesMeta": {
+    "astro": {
+      "optional": true
+    },
+    "stylus": {
+      "optional": false
+    }
   }
 }

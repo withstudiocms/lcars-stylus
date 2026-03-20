@@ -1,0 +1,11 @@
+---
+import { SupportsUnitSizing } from "./types";
+
+interface Props extends SupportsUnitSizing {}
+
+const { u } = Astro.props;
+---
+
+<div class:list={["lcars-column", u && `lcars-u-${u}`]}>
+    <slot />
+</div>

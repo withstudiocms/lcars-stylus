@@ -1,0 +1,9 @@
+---
+import type { SupportsColorway } from "./types";
+
+interface Props extends SupportsColorway {}
+
+const { color } = Astro.props;
+---
+
+<hr class:list={[`lcars-${color}-border`]} />

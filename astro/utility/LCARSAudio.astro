@@ -1,0 +1,308 @@
+---
+interface Props {
+    /**
+     * Base path for audio files.
+     *
+     * This should be a path to the directory (relative to Astro's public directory) where the audio files are located.
+     *
+     * @default "/audio/"
+     */
+    audioPath?: string;
+
+    /**
+     * File name (without extension) for the "tactile input acknowledge" sound effect. This is the sound that plays when a button is clicked or a tactile input is acknowledged.
+     *
+     * @default "tactinput_acknowledge"
+     */
+    TactInputAcknowledgeAudio?: string;
+
+    /**
+     * File name (without extension) for the "tactile input alternate acknowledge" sound effect. This is an alternate sound that can be used for a different type of tactile input acknowledgment.
+     *
+     * @default "tactinput_alt_acknowledge"
+     */
+    TactInputAlternateAcknowledgeAudio?: string;
+
+    /**
+     * File name (without extension) for the "tactile input negative acknowledge" sound effect. This is the sound that plays when a tactile input is negatively acknowledged, such as an error or invalid action.
+     *
+     * @default "tactinput_neg_acknowledge"
+     */
+    TactInputNegativeAcknowledgeAudio?: string;
+
+    /**
+     * File name (without extension) for the "alert" sound effect. This is the sound that plays when an alert action is triggered.
+     *
+     * @default "alert"
+     */
+    AlertAudio?: string;
+
+    /**
+     * File name (without extension) for the "red alert" sound effect. This is the sound that plays when a red alert action is triggered.
+     *
+     * @default "red_alert"
+     */
+    RedAlertAudio?: string;
+
+    /**
+     * File name (without extension) for the "ready" sound effect. This is the sound that plays when the system is ready.
+     *
+     * @default "ready"
+     */
+    ReadyAudio?: string;
+}
+
+const config = Astro.props;
+---
+
+<audio id="audDummy" data-config={JSON.stringify(config)}></audio>
+<script is:inline>
+    var audDummy = document
+        .getElementById("audDummy")
+        .appendChild(document.createElement("audio"));
+
+    var audConfig = JSON.parse(audDummy.dataset.config || "{}");
+
+    const audioPath = audConfig.audioPath || "/audio/";
+
+    // Remove leading slash if present, since we'll be concatenating this with file names that don't have a leading slash. This allows for more flexible configuration, such as "audio/" or "/audio/" or even "https://example.com/audio/".
+    const baseAudioPath = audioPath.replace(/^\/+/, "");
+
+    let {
+        TactInputAcknowledgeAudio = "tactinput_acknowledge",
+        TactInputAlternateAcknowledgeAudio = "tactinput_alt_acknowledge",
+        TactInputNegativeAcknowledgeAudio = "tactinput_neg_acknowledge",
+        AlertAudio = "alert",
+        RedAlertAudio = "red_alert",
+        ReadyAudio = "ready",
+    } = audConfig;
+
+    var lcarsAudio = {
+        audioExtensions: {
+            ogg: "ogg",
+            webm: "webm",
+            mp4: "aac",
+        },
+        audioPath,
+        audioType: "",
+        //Individual Sound Element holders
+        audTactInputAcknowledge: null,
+        audTactInputAltAcknowledge: null,
+        audTactInputNegAcknowledge: null,
+        audAlert: null,
+        audRedAlert: null,
+        audReady: null,
+        volume: 0.5,
+        initialize: function (auDummy) {
+            //Determine browser capability and willingness
+            for (var key in this.audioExtensions) {
+                if (
+                    auDummy.canPlayType("audio/" + this.audioExtensions[key]) !=
+                    ""
+                ) {
+                    auDummy.src = this.audioPath + "ready." + key;
+                    console.log(
+                        auDummy.src + "   " + auDummy.src.lastIndexOf("."),
+                    );
+                    this.audioType = auDummy.src.slice(
+                        auDummy.src.lastIndexOf(".") + 1,
+                    );
+                    console.log(
+                        "lcarsAudio: We have a winner: " + this.audioType,
+                    );
+                    break;
+                }
+            }
+            // Set Audio Track files
+            this.audTactInputAcknowledge = new Audio(
+                baseAudioPath +
+                    "/" +
+                    TactInputAcknowledgeAudio +
+                    "." +
+                    this.audioType,
+            );
+            this.audTactInputAltAcknowledge = new Audio(
+                baseAudioPath +
+                    "/" +
+                    TactInputAlternateAcknowledgeAudio +
+                    "." +
+                    this.audioType,
+            );
+            this.audTactInputNegAcknowledge = new Audio(
+                baseAudioPath +
+                    "/" +
+                    TactInputNegativeAcknowledgeAudio +
+                    "." +
+                    this.audioType,
+            );
+            this.audAlert = new Audio(
+                baseAudioPath + "/" + AlertAudio + "." + this.audioType,
+            );
+            this.audRedAlert = new Audio(
+                baseAudioPath + "/" + RedAlertAudio + "." + this.audioType,
+            );
+            this.audReady = new Audio(
+                baseAudioPath + "/" + ReadyAudio + "." + this.audioType,
+            );
+
+            // Configure Volumes
+            this.audTactInputAcknowledge.volume = this.volume;
+            this.audTactInputAltAcknowledge.volume = this.volume;
+            this.audTactInputNegAcknowledge.volume = this.volume;
+            this.audAlert.volume = this.volume;
+            this.audRedAlert.volume = this.volume;
+            this.audReady.volume = this.volume;
+
+            //Actual Standard Wire-up steps
+            var button_list = document.querySelectorAll(
+                "#container div.lcars-element.button, div.lcars-app-container div.lcars-element.button",
+            );
+            for (var button of button_list) {
+                if (button.classList.contains("nav")) {
+                    console.log(
+                        "Skipping audio-enabling nav button " +
+                            button.id +
+                            " " +
+                            button.innerText,
+                    );
+                    continue;
+                }
+                console.log(
+                    "Audio-enabling container-contained button " +
+                        button.id +
+                        " " +
+                        button.innerText,
+                );
+                button.addEventListener("click", function () {
+                    lcarsAudio.TactileInputAcknowledge();
+                });
+            }
+
+            button_list = document.querySelectorAll("path.button");
+            for (var button of button_list) {
+                console.log("Audio-enabling SVG button " + button.id);
+                button.addEventListener("click", function () {
+                    lcarsAudio.TactileInputAcknowledge();
+                });
+            }
+
+            button_list = document.querySelectorAll(
+                ".lcars-tactinput-acknowledge-audio",
+            );
+            for (var button of button_list) {
+                console.log(
+                    "Audio-enabling button " +
+                        button.id +
+                        " " +
+                        button.innerText,
+                );
+                button.addEventListener("click", function () {
+                    lcarsAudio.TactileInputAcknowledge();
+                });
+            }
+            button_list = document.querySelectorAll(
+                ".lcars-tactinput-alt-acknowledge-audio",
+            );
+            for (var button of button_list) {
+                console.log(
+                    "Audio-enabling button " +
+                        button.id +
+                        " " +
+                        button.innerText,
+                );
+                button.addEventListener("click", function () {
+                    lcarsAudio.TactileInputAlternateAcknowledge();
+                });
+            }
+            button_list = document.querySelectorAll(
+                ".lcars-tactinput-neg-acknowledge-audio",
+            );
+            for (var button of button_list) {
+                console.log(
+                    "Audio-enabling button " +
+                        button.id +
+                        " " +
+                        button.innerText,
+                );
+                button.addEventListener("click", function () {
+                    lcarsAudio.TactileInputNegativeAcknowledge();
+                });
+            }
+            button_list = document.querySelectorAll(".lcars-alert-audio");
+            for (var button of button_list) {
+                console.log(
+                    "Audio-enabling button " +
+                        button.id +
+                        " " +
+                        button.innerText,
+                );
+                button.addEventListener("click", function () {
+                    lcarsAudio.Alert();
+                });
+            }
+            button_list = document.querySelectorAll(".lcars-red-alert-audio");
+            for (var button of button_list) {
+                console.log(
+                    "Audio-enabling button " +
+                        button.id +
+                        " " +
+                        button.innerText,
+                );
+                button.addEventListener("click", function () {
+                    lcarsAudio.RedAlert();
+                });
+            }
+
+            //Range input a.k.a. "sliders"; does this need special behavior?
+            button_list = document.querySelectorAll("input[type='range']");
+            for (var button of button_list) {
+                console.log(
+                    "Audio-enabling range slider " +
+                        button.id +
+                        " " +
+                        button.name,
+                );
+                button.addEventListener("click", function () {
+                    lcarsAudio.TactileInputAcknowledge();
+                });
+            }
+        },
+        TactileInputAcknowledge: function () {
+            this.audTactInputAcknowledge?.play();
+        },
+        TactileInputAlternateAcknowledge: function () {
+            this.audTactInputAltAcknowledge?.play();
+        },
+        TactileInputNegativeAcknowledge: function () {
+            this.audTactInputNegAcknowledge?.play();
+        },
+        Alert: function () {
+            this.audAlert?.play();
+        },
+        RedAlert: function () {
+            this.audRedAlert?.play();
+        },
+        Ready: function () {
+            var promise = this.audReady?.play();
+            if (promise !== undefined) {
+                promise
+                    .then(() => {
+                        console.log(
+                            "Sound probably just actually played, so user interaction with document status must be 'true'.",
+                        );
+                    })
+                    .catch(() => {
+                        console.warn(
+                            "Autoplay was prevented. User interaction required before playback will be allowed by browser.",
+                        );
+                    });
+            } else {
+                console.warn(
+                    "Didn't even get a promise back. Possibly some error or device limitation.",
+                );
+            }
+        },
+    };
+
+    lcarsAudio.initialize(audDummy);
+</script>

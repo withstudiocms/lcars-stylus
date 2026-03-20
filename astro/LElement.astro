@@ -1,0 +1,68 @@
+---
+import type { SupportsOptionalColorway, SupportsUnitSizing } from "./types";
+
+interface Props extends SupportsOptionalColorway, SupportsUnitSizing {
+    /**
+     * If true, the LElement will be styled as a button, with additional padding and a hover effect. This is typically used when the element is intended to be interactive, such as a clickable button or link.
+     */
+    button?: boolean;
+
+    /**
+     * If true, the LElement will have a rounded corner on the left side. This is typically used when the element is at the beginning of a group of elements, to visually indicate that it is the first item in the group.
+     */
+    leftRounded?: boolean;
+
+    /**
+     * If true, the LElement will have a rounded corner on the right side. This is typically used when the element is at the end of a group of elements, to visually indicate that it is the last item in the group.
+     */
+    rightRounded?: boolean;
+
+    /**
+     * If true, the LElement will have fully rounded corners, rather than just left or right. This is typically used for standalone elements that are not adjacent to other elements, to give them a more pill-shaped appearance.
+     */
+    rounded?: boolean;
+
+    /**
+     * Additional classes to apply to the LElement container. This can be used for custom styling or to apply utility classes from a framework like Tailwind CSS.
+     */
+    classList?: string;
+
+    /**
+     * If true, an additional element will be rendered inside the LElement, styled as an addition. The content of this element should be provided via the "addition" slot.
+     */
+    addition?: boolean;
+}
+
+const {
+    color,
+    button,
+    leftRounded,
+    rightRounded,
+    rounded,
+    classList,
+    addition,
+    u,
+} = Astro.props;
+---
+
+<div
+    class:list={[
+        "lcars-element",
+        color && `lcars-${color}-bg`,
+        button && "button",
+        leftRounded && "left-rounded",
+        rightRounded && "right-rounded",
+        rounded && "rounded",
+        u && `lcars-u-${u}`,
+        classList,
+    ]}
+>
+    <span class="text"><slot /></span>
+    {
+        addition && (
+            <div class="lcars-element-addition">
+                <slot name="addition" />
+            </div>
+        )
+    }
+</div>
