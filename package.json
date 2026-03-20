@@ -35,10 +35,14 @@
   "homepage": "https://github.com/withstudiocms/lcars-stylus#readme",
   "keywords": [
     "stylus",
+    "css",
+    "ui",
     "lcars",
     "lcars-style",
     "lcars-interface",
-    "design-system"
+    "design-system",
+    "withastro",
+    "astro-component"
   ],
   "scripts": {
     "changeset": "changeset",
