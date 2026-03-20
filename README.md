@@ -90,6 +90,7 @@ These components will be available as part of the `@withstudiocms/lcars-stylus/a
   - `TextBox.astro` - A display-only text box with pre-defined font sizes. Use to fit headers and indicators, but not for large texts. **Also not for text inputs**.
 - `layouts/`
   - `Basic.astro` - The Basic/Classic single frame LCARS Layout for Astro.
+  - `Voyager.astro` - A Voyager era inspired LCARS layout for Astro.
 - `utility/`
   - `LCARSAudio.astro` - UI Audio controller
   - `LCARSColorFix.astro` - UI Dark/light text color fixer, Makes text color white or black depending on background color.
