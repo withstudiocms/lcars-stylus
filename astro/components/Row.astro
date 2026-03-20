@@ -1,11 +1,20 @@
 ---
+import { HTMLAttributes } from "astro/types";
 import { SupportsUnitSizing } from "../types";
 
-interface Props extends SupportsUnitSizing {}
+interface Props extends SupportsUnitSizing, HTMLAttributes<"div"> {
+    /**
+     * If true, the Row will be styled as a header row, with larger text and additional spacing. This is typically used for rows that serve as section headers or titles within a layout, to visually distinguish them from regular content rows.
+     */
+    header?: boolean;
+}
 
-const { u } = Astro.props;
+const { u, header, ...props } = Astro.props;
 ---
 
-<div class:list={["lcars-row", u && `lcars-u-${u}`]}>
+<div
+    {...props}
+    class:list={["lcars-row", u && `lcars-u-${u}`, header && "header"]}
+>
     <slot />
 </div>

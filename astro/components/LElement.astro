@@ -1,7 +1,12 @@
 ---
+import { HTMLAttributes } from "astro/types";
 import type { SupportsOptionalColorway, SupportsUnitSizing } from "../types";
 
-interface Props extends SupportsOptionalColorway, SupportsUnitSizing {
+interface Props
+    extends
+        SupportsOptionalColorway,
+        SupportsUnitSizing,
+        Omit<HTMLAttributes<"div">, "color"> {
     /**
      * If true, the LElement will be styled as a button, with additional padding and a hover effect. This is typically used when the element is intended to be interactive, such as a clickable button or link.
      */
@@ -42,10 +47,12 @@ const {
     classList,
     addition,
     u,
+    ...props
 } = Astro.props;
 ---
 
 <div
+    {...props}
     class:list={[
         "lcars-element",
         color && `lcars-${color}-bg`,

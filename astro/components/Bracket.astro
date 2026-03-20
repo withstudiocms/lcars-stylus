@@ -1,7 +1,8 @@
 ---
+import { HTMLAttributes } from "astro/types";
 import { XYPositions } from "../types";
 
-interface Props {
+interface Props extends HTMLAttributes<"div"> {
     /**
      * Determines the position of the bracket within its container. This can be used to align the bracket to the left, right, top, or bottom, depending on the desired layout and design. Proper positioning can enhance readability and visual appeal, as well as create a sense of balance and harmony within the overall design.
      */
@@ -13,9 +14,9 @@ interface Props {
     hollow?: boolean;
 }
 
-const { position, hollow } = Astro.props;
+const { position, hollow, ...props } = Astro.props;
 ---
 
-<div class:list={["lcars-bracket", position, hollow && "hollow"]}>
+<div {...props} class:list={["lcars-bracket", position, hollow && "hollow"]}>
     <slot />
 </div>

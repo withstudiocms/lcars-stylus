@@ -1,11 +1,21 @@
 ---
 import { SupportsUnitSizing } from "../types";
+import { HTMLAttributes } from "astro/types";
 
-interface Props extends SupportsUnitSizing {}
+interface Props extends SupportsUnitSizing, HTMLAttributes<"div"> {
+    startSpace?: boolean;
+}
 
-const { u } = Astro.props;
+const { u, startSpace, ...props } = Astro.props;
 ---
 
-<div class:list={["lcars-column", u && `lcars-u-${u}`]}>
+<div
+    {...props}
+    class:list={[
+        "lcars-column",
+        u && `lcars-u-${u}`,
+        startSpace && "start-space",
+    ]}
+>
     <slot />
 </div>

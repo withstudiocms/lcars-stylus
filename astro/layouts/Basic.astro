@@ -10,7 +10,7 @@ interface Props {
     key: string;
     navigation: NavigationItem[];
     copyright: CopyrightTagline;
-    externalLink: {
+    externalLink?: {
         text: string;
         href: string;
     }
@@ -19,6 +19,7 @@ interface Props {
 const { siteTitle, key, navigation, copyright, externalLink } = Astro.props;
 ---
 
+{/* Main App Container */}
 <div class="lcars-app-container">
     {/* Header/Top bar */}
     <div id="header" class="lcars-row header">
@@ -100,9 +101,12 @@ const { siteTitle, key, navigation, copyright, externalLink } = Astro.props;
         <slot />
     </div>
 </div>
+
+{/* Utility Components */}
 <LCARSAudio />
 <LCARSColorFix />
 
+{/* Loading Script */}
 <script is:inline>
     function ready() {
         setTimeout(() => {

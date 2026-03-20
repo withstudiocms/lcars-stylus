@@ -1,7 +1,9 @@
 ---
 import type { SupportsOptionalColorway, HorizontalPositions } from "../types";
+import { HTMLAttributes } from "astro/types";
 
-interface Props extends SupportsOptionalColorway {
+interface Props
+    extends SupportsOptionalColorway, Omit<HTMLAttributes<"table">, "color"> {
     /**
      * Enables a scanning animation on the table, which creates a sweeping light effect across the table. This is purely decorative and does not affect the functionality of the table in any way. Note that enabling this will hide the caption, as the scanning animation requires the caption to be hidden for proper display.
      */
@@ -35,10 +37,12 @@ const {
     caption,
     captionPosition,
     standardHeader,
+    ...props
 } = Astro.props;
 ---
 
 <table
+    {...props}
     class:list={[
         "lcars-table",
         color && `lcars-${color}-color`,

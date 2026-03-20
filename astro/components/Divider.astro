@@ -1,9 +1,10 @@
 ---
 import type { SupportsColorway } from "../types";
+import { HTMLAttributes } from "astro/types";
 
-interface Props extends SupportsColorway {}
+interface Props extends SupportsColorway, Omit<HTMLAttributes<"hr">, "color"> {}
 
-const { color } = Astro.props;
+const { color, ...props } = Astro.props;
 ---
 
-<hr class:list={[`lcars-${color}-border`]} />
+<hr {...props} class:list={[`lcars-${color}-border`]} />
