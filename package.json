@@ -22,7 +22,7 @@
   ],
   "exports": {
     ".": "./index.styl",
-    "./*.styl": "./*.styl",
+    "./*.styl": "./lib/*.styl",
     "./astro/*": "./astro/*"
   },
   "repository": {
