@@ -1,0 +1,14 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import type { HorizontalPositions } from "../types";
+
+interface Props extends HTMLAttributes<"div"> {
+    position?: HorizontalPositions;
+}
+
+const { position, ...props } = Astro.props;
+---
+
+<div {...props} class:list={["lcars-title", position]}>
+    <slot />
+</div>

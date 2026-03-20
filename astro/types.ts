@@ -100,3 +100,8 @@ export type CopyrightTagline = {
     preamble: string;
     company: string;
 }
+
+/**
+ * Defines a type for elbow positions in the LCARS-themed website, represented as a template literal type that combines horizontal positions (left or right) with vertical positions (top or bottom) in the format of "horizontal-vertical" (e.g., "left-top", "right-bottom"), allowing for precise specification of elbow component placements within the layout while adhering to the LCARS design principles.
+ */
+export type ElbowPositions = `${HorizontalPositions}-${VerticalPositions}`;

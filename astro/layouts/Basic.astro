@@ -1,6 +1,11 @@
 ---
+import type { CopyrightTagline, NavigationItem } from "../types";
+import Bar from "../components/Bar.astro";
+import BarTitle from "../components/BarTitle.astro";
+import Column from "../components/Column.astro";
+import Elbow from "../components/Elbow.astro";
 import LElement from "../components/LElement.astro";
-import { CopyrightTagline, NavigationItem } from "../types";
+import Row from "../components/Row.astro";
 import LCARSAudio from "../utility/LCARSAudio.astro";
 import LCARSColorFix from "../utility/LCARSColorFix.astro";
 import LCARSLoading from "../utility/LCARSLoading.astro";
@@ -22,26 +27,20 @@ const { siteTitle, key, navigation, copyright, externalLink } = Astro.props;
 {/* Main App Container */}
 <div class="lcars-app-container">
     {/* Header/Top bar */}
-    <div id="header" class="lcars-row header">
-        {/* ELBOW */}
-        <div class="lcars-elbow left-bottom"></div>
-
-        {/* BAR WITH TITLE */}
-        <div class="lcars-bar horizontal">
-            <div class="lcars-title right">{siteTitle}</div>
-        </div>
-
-        {/* ROUNDED EDGE DECORATED */}
-        <div class="lcars-bar horizontal right-end decorated"></div>
-    </div>
+    <Row id="header" header>
+        <Elbow position="left-bottom" />
+        <Bar horizontal>
+            <BarTitle position="right">{siteTitle}</BarTitle>
+        </Bar>
+        <Bar horizontal rightEnd decorated />
+    </Row>
 
     {/* Left Sidebar */}
-    <div
-        id="left-menu"
-        class="lcars-column start-space lcars-u-1"
-        style="text-transform: uppercase;"
-    >
-        {/* Primary Navigation Links */}
+    <Column 
+        id="left-menu" 
+        startSpace 
+        u={1} 
+        style="text-transform: uppercase;">
         {
             navigation.map((navItem) => (
                 <a href={key === navItem.key ? undefined : navItem.href}>
@@ -57,29 +56,26 @@ const { siteTitle, key, navigation, copyright, externalLink } = Astro.props;
                 </a>
             ))
         }
-
         {
             externalLink ? (
-                <div class="lcars-bar fill lcars-u-1"></div>
-                <div class="lcars-bar spacer"></div>
+                <Bar fill u={1} />
+                <Bar spacer />
                 <a href={externalLink.href} target="_blank">
                     <LElement button classList="nav" color="atomic-tangerine">
                         {externalLink.text}
                     </LElement>
                 </a>
-                <div class="lcars-bar lock-bottom lcars-u-1"></div>
+                <Bar lockBottom u={1} />
             ) : (
-                <div class="lcars-bar lcars-u-1"></div>
+                <Bar fill u={1} />
             )
         }
-    </div>
+    </Column>
 
     {/* Footer */}
-    <div id="footer" class="lcars-row">
-        {/* ELBOW */}
-        <div class="lcars-elbow left-top"></div>
-        {/* BAR */}
-        <div class="lcars-bar horizontal both-divider bottom">
+    <Row id="footer">
+        <Elbow position="left-top" />
+        <Bar horizontal bothDivider bottom>
             <div class="lcars-copy left">
                 {copyright.preamble}
                 {new Date().getFullYear()} - {copyright.company}.
@@ -89,10 +85,9 @@ const { siteTitle, key, navigation, copyright, externalLink } = Astro.props;
                 This website is not affiliated with or endorsed by CBS in any
                 way.
             </div>
-        </div>
-        {/* ROUNDED EDGE */}
-        <div class="lcars-bar horizontal right-end left-divider bottom"></div>
-    </div>
+        </Bar>
+        <Bar horizontal rightEnd leftDivider bottom />
+    </Row>
 
     <LCARSLoading />
 

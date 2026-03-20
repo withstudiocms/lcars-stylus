@@ -1,0 +1,21 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import type { SupportsOptionalColorway, ElbowPositions } from "../types";
+
+interface Props
+    extends SupportsOptionalColorway, Omit<HTMLAttributes<"div">, "color"> {
+    /**
+     * Determines the position of the Elbow component, which affects its shape and orientation. The position can be one of several predefined values, each corresponding to a specific corner or edge of the layout. This allows the Elbow to visually connect different sections of the interface in a way that complements the overall design and flow of the content.
+     */
+    position: ElbowPositions;
+}
+
+const { position, color, ...props } = Astro.props;
+---
+
+<div
+    {...props}
+    class:list={["lcars-elbow", position, color && `lcars-${color}-color`]}
+>
+    <slot />
+</div>
