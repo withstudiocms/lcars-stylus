@@ -15,7 +15,7 @@ const { position, color, ...props } = Astro.props;
 
 <div
     {...props}
-    class:list={["lcars-elbow", position, color && `lcars-${color}-color`]}
+    class:list={["lcars-elbow", position, color && `lcars-${color}-bg`]}
 >
     <slot />
 </div>

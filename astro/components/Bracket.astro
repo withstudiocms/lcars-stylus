@@ -1,8 +1,9 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import type { XYPositions } from "../types";
+import type { SupportsOptionalColorway, XYPositions } from "../types";
 
-interface Props extends HTMLAttributes<"div"> {
+interface Props
+    extends SupportsOptionalColorway, Omit<HTMLAttributes<"div">, "color"> {
     /**
      * Determines the position of the bracket within its container. This can be used to align the bracket to the left, right, top, or bottom, depending on the desired layout and design. Proper positioning can enhance readability and visual appeal, as well as create a sense of balance and harmony within the overall design.
      */
@@ -14,9 +15,17 @@ interface Props extends HTMLAttributes<"div"> {
     hollow?: boolean;
 }
 
-const { position, hollow, ...props } = Astro.props;
+const { position, hollow, color, ...props } = Astro.props;
 ---
 
-<div {...props} class:list={["lcars-bracket", position, hollow && "hollow"]}>
+<div
+    {...props}
+    class:list={[
+        "lcars-bracket",
+        position,
+        hollow && "hollow",
+        color && `lcars-${color}-bg`,
+    ]}
+>
     <slot />
 </div>
