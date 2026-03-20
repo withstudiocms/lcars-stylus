@@ -1,0 +1,157 @@
+---
+import { ComponentProps } from 'astro/types';
+import Bar from '../components/Bar.astro';
+import BarTitle from '../components/BarTitle.astro';
+import Column from '../components/Column.astro';
+import DataTable from '../components/DataTable.astro';
+import Elbow from '../components/Elbow.astro';
+import LElement from '../components/LElement.astro';
+import Row from '../components/Row.astro';
+import { CopyrightTagline, HorizontalPositions, NavigationItem } from '../types';
+import { LCARSAudio, LCARSLoading, LCARSColorFix } from '../utility';
+
+
+interface Props {
+    siteTitle: string;
+    key: string;
+    navigation: NavigationItem[];
+    copyright: CopyrightTagline;
+    titlePosition?: HorizontalPositions;
+    externalLink?: {
+        text: string;
+        href: string;
+    }
+    audioConfig?: ComponentProps<typeof LCARSAudio>;
+    loadingConfig?: ComponentProps<typeof LCARSLoading>;
+}
+
+const { siteTitle, key, navigation, copyright, externalLink, audioConfig, loadingConfig, titlePosition = "left" } = Astro.props;
+
+---
+{/* Main App Container */}
+<div class="lcars-app-container">
+    {/* Header/Top bar */}
+    <Column id="header">
+        <LElement u={1} color="lilac">04-041969</LElement>
+        <Row header>
+            <Elbow position="left-top" color="melrose">
+                <span class="text">03-111968</span>
+            </Elbow>
+            <DataTable scanningFast color="atomic-tangerine">
+                <tr><td>93</td><td>1853</td><td>24109</td><td>7</td><td>7024</td><td>322</td><td>4149</td><td>86</td><td>05</td><td>2014</td><td>30986</td><td>21509</td><td>68417</td><td>80</td><td>2048</td><td>319825</td><td>46233</td><td>05</td><td>2014</td><td>30986</td><td>395852</td><td>21509</td><td>68417</td><td>308</td><td>2623</td><td>319825</td><td>534082</td><td>206</td><td>2107853</td><td>12201972</td><td>24487255</td><td>46233</td><td>604206</td><td>309150</td><td>604206</td><td>21509</td><td>68417</td><td>210411</td><td>817660</td><td>121979</td><td>25403</td><td>31219</td><td>752</td><td>0604</td><td>21048</td></tr>
+                <tr><td>21509</td><td>210411</td><td>817660</td><td>121979</td><td>25403</td><td>31219</td><td>68417</td><td>80</td><td>206</td><td>2107853</td><td>12201972</td><td>24487255</td><td>46233</td><td>2048</td><td>319825</td><td>46233</td><td>05</td><td>2014</td><td>30986</td><td>21509</td><td>68417</td><td>80</td><td>2048</td><td>319825</td><td>46233</td><td>05</td><td>2014</td><td>30986</td><td>29620</td><td>339048</td><td>31802</td><td>9859</td><td>672304</td><td>581131</td><td>338</td><td>70104</td><td>16182</td><td>711632</td><td>102955</td><td>2061</td><td>5804</td><td>850233</td><td>833441</td><td>465</td><td>210047</td></tr>
+                <tr><td>585101</td><td>25403</td><td>31219</td><td>752</td><td>0604</td><td>21048</td><td>293612</td><td>534082</td><td>206</td><td>2107853</td><td>12201972</td><td>24487255</td><td>30412</td><td>0604</td><td>21048</td><td>293612</td><td>534082</td><td>206</td><td>020478</td><td>26419</td><td>372122</td><td>2623</td><td>79</td><td>90008</td><td>8049</td><td>251664</td><td>900007</td><td>704044</td><td>982365</td><td>25819</td><td>385</td><td>656214</td><td>409</td><td>218563</td><td>527222</td><td>2014</td><td>30986</td><td>293612</td><td>534082</td><td>206</td><td>020478</td><td>26419</td><td>21509</td><td>68417</td><td>80</td></tr>
+            </DataTable>
+            <Bar spacer />
+            <Bar horizontal bottom u={3}>
+                <BarTitle position={titlePosition}>{siteTitle}</BarTitle>
+            </Bar>
+            <Bar horizontal bottom color="neon-carrot" u={1} leftSpace />
+            <Bar horizontal bottom color="lilac" u={2} leftSpace />
+            <Bar horizontal bottom color="lilac" fill leftSpace rightSpace />
+            <Bar horizontal bottom color="red-damask" u={1} />
+            <Bar horizontal rightEnd decorated bottom color="red-damask" />
+        </Row>
+        <Row header>
+            <Elbow position="left-bottom" color="red-damask" />
+            <Bar horizontal u={4} color="red-damask" >
+                <div class="lcars-copy left">
+                    {copyright.preamble}
+                    {new Date().getFullYear()} - {copyright.company}.
+                </div>
+            </Bar>
+            <Bar spacer />
+            <Bar horizontal color="lilac" rightSpace>
+                <div class="lcars-copy right">
+                    LCARS is a copyright of CBS Studios INC. All rights
+                    reserved. This website is not affiliated with or
+                    endorsed by CBS in any way.
+                </div>
+            </Bar>
+            <Bar horizontal rightEnd decorated color="neon-carrot" />
+        </Row>
+    </Column>
+
+    {/* Left Sidebar */}
+    <Column 
+        id="left-menu" 
+        startSpace 
+        u={1} 
+        style="text-transform: uppercase; padding-top: 12.5rem;">
+        {
+            navigation.map((navItem) => (
+                <a href={key === navItem.key ? undefined : navItem.href}>
+                    <LElement
+                        color={navItem.color || "golden-tanoi"}
+                        button
+                        classList={
+                            key === navItem.key ? "nav active" : "nav"
+                        }
+                    >
+                        {navItem.text}
+                    </LElement>
+                </a>
+            ))
+        }
+        {
+            externalLink ? (
+                <Bar fill u={1} color="red-damask" />
+                <Bar spacer />
+                <a href={externalLink.href} target="_blank">
+                    <LElement button classList="nav" color="atomic-tangerine">
+                        {externalLink.text}
+                    </LElement>
+                </a>
+                <Bar lockBottom u={1} color="red-damask" />
+            ) : (
+                <Bar fill u={1} color="red-damask" />
+            )
+        }
+    </Column>
+
+    <LCARSLoading {...loadingConfig} />
+
+    {/* Main Content Container */}
+    <div id="container" style="padding-top: 8.5rem;">
+        <slot />
+    </div>
+</div>
+
+{/* Utility Components */}
+<LCARSAudio {...audioConfig} />
+<LCARSColorFix />
+
+{/* Loading Script */}
+<script is:inline>
+    function ready() {
+        setTimeout(() => {
+            const app = document.querySelector(".lcars-app-container");
+            app?.classList.add("is-ready");
+            lcarsAudio.Ready();
+        }, 250);
+    }
+
+    document.addEventListener("DOMContentLoaded", ready);
+</script>
+
+<style is:global>
+    #header {
+        & .lcars-table {
+            position: absolute;
+            top: 1rem;
+            left: 10rem;
+        }
+        & .lcars-bar {
+            text-wrap-mode: nowrap;
+            overflow: clip;
+        }
+        & .lcars-elbow .text {
+            font-weight: bold;
+            color: #000;
+            position: absolute;
+            font-size: 120%;
+            top: 0;
+            right: 2.8rem;
+        }
+    }
+</style>
