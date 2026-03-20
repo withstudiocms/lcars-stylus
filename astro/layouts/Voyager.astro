@@ -144,9 +144,6 @@ const { siteTitle, key, navigation, copyright, externalLink, audioConfig, loadin
         & .lcars-bar {
             text-wrap-mode: nowrap;
             overflow: clip;
-            &.lock-bottom {
-                margin-bottom: 3rem;
-            }
         }
         & .lcars-elbow .text {
             font-weight: bold;
@@ -155,6 +152,11 @@ const { siteTitle, key, navigation, copyright, externalLink, audioConfig, loadin
             font-size: 120%;
             top: 0;
             right: 2.8rem;
+        }
+    }
+    #left-menu {
+        & .lcars-bar.lock-bottom {
+            margin-bottom: 3rem;
         }
     }
 </style>
