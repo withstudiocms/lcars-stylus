@@ -1,10 +1,13 @@
 # LCARS Design system for Stylus
 
-LCARS is a purely CSS and HTML framework, similar to Bootstrap, Foundation, Topcoat, Brick, or Pure to create user interfaces similar to a certain popular sci-fi franchise. There are a few requirements in terms of HTML element nesting and corresponding CSS classes that are necessary for the styling to apply correctly, please checkout our example theme for details about how to implement this.
+[![NPM Version](https://img.shields.io/npm/v/@withstudiocms/lcars-stylus)](https://npm.im/@withstudiocms/lcars-stylus)
+[![pkg.pr.new](https://pkg.pr.new/badge/withstudiocms/lcars-stylus)](https://pkg.pr.new/~/withstudiocms/lcars-stylus)
+
+LCARS is a purely CSS and HTML framework (Served as `.styl` Stylus files), similar to Bootstrap, Foundation, Topcoat, Brick, or Pure to create user interfaces similar to a certain popular sci-fi franchise. There are a few requirements in terms of HTML element nesting and corresponding CSS classes that are necessary for the styling to apply correctly, please checkout our example theme for details about how to implement this.
 
 ## Requirements
 
-- Stylus
+- Stylus - [Learn more Here](https://stylus-lang.com/)
 - LCARS GTJ3 font - [Available Here](https://gtjlcars.de/LCARSindex/LCARSFONTS.htm)
 
 ## Usage
@@ -53,7 +56,10 @@ In your `Layout.astro`
 
 ```astro
 ---
+import "@withstudiocms/lcars-stylus"; 
+// OR
 import "@withstudiocms/lcars-stylus/index.styl";
+
 import { Font } from "astro:assets";
 ---
 <html>
@@ -71,10 +77,10 @@ import { Font } from "astro:assets";
 
 Checkout the main Example theme built with Astro for how to work with this project.
 
-- TODO: Add link once ready
+- [Astro-LCARS theme](https://github.com/withstudiocms/astro-lcars)
 
 ## Licensing
 
-MIT Licensed 2026-Present
+MIT Licensed 2026-Present - withstudiocms
 
 LCARS is a copyright of CBS Studios INC. and Star Trek. All rights reserved. This project is not endorsed or affiliated with CBS or Star Trek in any way, this is a fan project meant solely for fun!
