@@ -1,13 +1,13 @@
 ---
 import type { CopyrightTagline, HorizontalPositions, NavigationItem } from "../types";
+import type { ComponentProps } from "astro/types";
+import { LCARSAudio, LCARSColorFix, LCARSLoading } from "../utility/index";
 import Bar from "../components/Bar.astro";
 import BarTitle from "../components/BarTitle.astro";
 import Column from "../components/Column.astro";
 import Elbow from "../components/Elbow.astro";
 import LElement from "../components/LElement.astro";
 import Row from "../components/Row.astro";
-import { LCARSAudio, LCARSColorFix, LCARSLoading } from "../utility/index";
-import { ComponentProps } from "astro/types";
 
 interface Props {
     siteTitle: string;
