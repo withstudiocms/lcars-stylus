@@ -1,5 +1,11 @@
 # @withstudiocms/lcars-stylus
 
+## 1.1.0
+
+### Minor Changes
+
+- [#4](https://github.com/withstudiocms/lcars-stylus/pull/4) [`4ceb150`](https://github.com/withstudiocms/lcars-stylus/commit/4ceb15060fa9a0f9cfd4b16a61ca18c84d4a8bed) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Implements new shared Astro components for easy reuse across projects.
+
 ## 1.0.1
 
 ### Patch Changes
