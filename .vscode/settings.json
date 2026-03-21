@@ -5,6 +5,7 @@
         "csvg",
         "dimgrey",
         "Framecount",
+        "grayscale",
         "hopbush",
         "joernweissenborn",
         "Jörn",
@@ -18,9 +19,11 @@
         "rgba",
         "rowscan",
         "styl",
+        "tactinput",
         "tamarillo",
         "tanoi",
         "Weißenborn",
+        "withastro",
         "withstudiocms"
     ]
 }

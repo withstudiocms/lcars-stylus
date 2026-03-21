@@ -1,0 +1,58 @@
+---
+import type { SupportsOptionalColorway, HorizontalPositions } from "../types";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props
+    extends SupportsOptionalColorway, Omit<HTMLAttributes<"table">, "color"> {
+    /**
+     * Enables a scanning animation on the table, which creates a sweeping light effect across the table. This is purely decorative and does not affect the functionality of the table in any way. Note that enabling this will hide the caption, as the scanning animation requires the caption to be hidden for proper display.
+     */
+    scanning?: boolean;
+
+    /**
+     * Faster version of the `scanning` prop, which increases the speed of the scanning animation. Note that this will not work if the `scanning` prop is not enabled, as the scanning animation must be active for this to have any effect.
+     */
+    scanningFast?: boolean;
+
+    /**
+     * Adds a caption to the table, which is styled according to LCARS standards. Note that the caption will be hidden when the `scanning` prop is enabled, as the scanning animation requires the caption to be hidden for proper display.
+     */
+    caption?: string;
+
+    /**
+     * Positions the caption on the left or right side of the table, instead of the default top position. Note that this will not work if the `scanning` prop is enabled, as the scanning animation requires the caption to be in the top position.
+     */
+    captionPosition?: HorizontalPositions;
+
+    /**
+     * Applies LCARS standard header styles to the first row of the table. This is not necessary when using the `Row` component with the `header` prop, but can be used for tables that are not built with LCARS components.
+     */
+    standardHeader?: boolean;
+}
+
+const {
+    color,
+    scanning,
+    scanningFast,
+    caption,
+    captionPosition,
+    standardHeader,
+    ...props
+} = Astro.props;
+---
+
+<table
+    {...props}
+    class:list={[
+        "lcars-table",
+        color && `lcars-${color}-color`,
+        scanning && "scanning",
+        scanningFast && "scanning-fast",
+        caption && "with-caption",
+        captionPosition === "right" ? "caption-right" : "caption-left",
+        standardHeader && "standard-header",
+    ]}
+>
+    {caption && <caption>{caption}</caption>}
+    <slot />
+</table>

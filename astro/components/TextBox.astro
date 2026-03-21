@@ -1,0 +1,36 @@
+---
+import type { SupportsUnitSizing, TextBoxPositions, TextSizes } from "../types";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends SupportsUnitSizing, HTMLAttributes<"div"> {
+    /**
+     * Specifies the size of the text within the text box. This can be used to create a hierarchy of information, with larger text sizes indicating more important or prominent information. Common text sizes include small, medium, large, and extra-large, but the specific options may vary based on the design system being used.
+     */
+    textSize?: TextSizes;
+
+    /**
+     * Determines the position of the text box within its container. This can be used to align the text box to the left, right, or center, depending on the desired layout and design. Proper positioning can enhance readability and visual appeal.
+     */
+    position?: TextBoxPositions;
+
+    /**
+     * Applies a blinking animation to the text box. This is typically used to indicate an active or attention-grabbing state, such as a warning or alert. Use sparingly to avoid overwhelming users.
+     */
+    blink?: boolean;
+}
+
+const { position, textSize, blink, u, ...props } = Astro.props;
+---
+
+<div
+    {...props}
+    class:list={[
+        "lcars-text-box",
+        position,
+        textSize,
+        blink && "blink",
+        u && `lcars-u-${u}`,
+    ]}
+>
+    <slot />
+</div>

@@ -1,0 +1,104 @@
+---
+import { LCARSAudio, LCARSColorFix, LCARSLoading } from "../utility/index";
+import Bar from "../components/Bar.astro";
+import BarTitle from "../components/BarTitle.astro";
+import Column from "../components/Column.astro";
+import Elbow from "../components/Elbow.astro";
+import LElement from "../components/LElement.astro";
+import Row from "../components/Row.astro";
+import { SharedLayoutProps } from './shared';
+
+interface Props extends SharedLayoutProps {}
+
+const { siteTitle, key, navigation, copyright, externalLink, audioConfig, loadingConfig, titlePosition = "right" } = Astro.props;
+---
+
+{/* Main App Container */}
+<div class="lcars-app-container">
+    {/* Header/Top bar */}
+    <Row id="header" header>
+        <Elbow position="left-bottom" />
+        <Bar horizontal>
+            <BarTitle position={titlePosition}>{siteTitle}</BarTitle>
+        </Bar>
+        <Bar horizontal rightEnd decorated />
+    </Row>
+
+    {/* Left Sidebar */}
+    <Column 
+        id="left-menu" 
+        startSpace 
+        u={1} 
+        style="text-transform: uppercase;">
+        {
+            navigation.map((navItem) => (
+                <a href={key === navItem.key ? undefined : navItem.href}>
+                    <LElement
+                        color={navItem.color || "golden-tanoi"}
+                        button
+                        classList={
+                            key === navItem.key ? "nav active" : "nav"
+                        }
+                    >
+                        {navItem.text}
+                    </LElement>
+                </a>
+            ))
+        }
+        {
+            externalLink ? (
+                <Bar fill u={1} />
+                <Bar spacer />
+                <a href={externalLink.href} target="_blank">
+                    <LElement button classList="nav" color="atomic-tangerine">
+                        {externalLink.text}
+                    </LElement>
+                </a>
+                <Bar lockBottom u={1} />
+            ) : (
+                <Bar fill u={1} />
+            )
+        }
+    </Column>
+
+    {/* Footer */}
+    <Row id="footer">
+        <Elbow position="left-top" />
+        <Bar horizontal bothDivider bottom>
+            <div class="lcars-copy left">
+                {copyright.preamble}
+                {new Date().getFullYear()} - {copyright.company}.
+            </div>
+            <div class="lcars-copy right">
+                LCARS is a copyright of CBS Studios INC. All rights reserved.
+                This website is not affiliated with or endorsed by CBS in any
+                way.
+            </div>
+        </Bar>
+        <Bar horizontal rightEnd leftDivider bottom />
+    </Row>
+
+    <LCARSLoading {...loadingConfig} />
+
+    {/* Main Content Container */}
+    <div id="container">
+        <slot />
+    </div>
+</div>
+
+{/* Utility Components */}
+<LCARSAudio {...audioConfig} />
+<LCARSColorFix />
+
+{/* Loading Script */}
+<script is:inline>
+    function ready() {
+        setTimeout(() => {
+            const app = document.querySelector(".lcars-app-container");
+            app?.classList.add("is-ready");
+            lcarsAudio.Ready();
+        }, 250);
+    }
+
+    document.addEventListener("DOMContentLoaded", ready);
+</script>

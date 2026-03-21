@@ -1,0 +1,134 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import type { SupportsOptionalColorway, SupportsUnitSizing } from "../types";
+
+interface Props
+    extends
+        SupportsOptionalColorway,
+        SupportsUnitSizing,
+        Omit<HTMLAttributes<"div">, "color"> {
+    /**
+     * When true, the Bar component will be styled as a spacer, which typically means it will have increased height and may include additional padding or margins to create visual separation between sections of content. This is often used to improve readability and organization within a layout by providing clear breaks between different areas of information.
+     */
+    spacer?: boolean;
+
+    /**
+     * When true, the Bar component will be styled as a double spacer, which is an enhanced version of the standard spacer. A double spacer typically has even greater height and more pronounced padding or margins compared to a regular spacer, creating an even stronger visual separation between sections of content. This can be particularly useful in layouts that require distinct divisions between major sections or when a more dramatic break is desired for emphasis.
+     */
+    doubleSpacer?: boolean;
+
+    /**
+     * Adds extra margin of base spacing to the left
+     */
+    leftSpace?: boolean;
+
+    /**
+     * Adds extra margin of double base spacing to the left
+     */
+    leftDoubleSpace?: boolean;
+
+    /**
+     * Adds extra margin of base spacing to the right
+     */
+    rightSpace?: boolean;
+
+    /**
+     * Adds extra margin of double base spacing to the right
+     */
+    rightDoubleSpace?: boolean;
+
+    /**
+     * When true, the Bar component will be styled horizontally, which typically means it will have a wider width and may include additional styling to differentiate it from vertical bars. A horizontal bar is often used as a visual divider between sections of content or as a design element to enhance the overall layout. It can help to create a sense of flow and continuity across the page, guiding the user's eye from one section to the next in a more natural way.
+     */
+    horizontal?: boolean;
+
+    /**
+     * Sets the height and the width to 1/3 of the unit height and rounds the left edges. Use at the edges of horizontal bars.
+     */
+    leftEnd?: boolean;
+
+    /**
+     * Sets the height and the width to 1/3 of the unit height and rounds the right edges. Use at the edges of horizontal bars.
+     */
+    rightEnd?: boolean;
+
+    /**
+     * adds a decorative stripe to the bar, which can enhance its visual appeal and make it stand out more within the layout. The specific design of the decorative stripe may vary, but it typically involves adding a contrasting color or pattern to a portion of the bar, creating a visually interesting element that draws attention and adds character to the overall design.
+     *
+     * @requires leftEnd or rightEnd to be true, as the decorative stripe is designed to complement the rounded edges created by these properties. The decorative stripe is often positioned near the rounded edge to enhance its visual impact and create a cohesive design element that ties together the overall look of the bar.
+     */
+    decorated?: boolean;
+
+    /**
+     * When true, the Bar component will be styled to fill the available space within its container. This typically means that the bar will expand to take up all remaining horizontal or vertical space, depending on its orientation. A filled bar can be used to create a strong visual presence and can help to balance the layout by filling in gaps and creating a more cohesive design. It is often used in conjunction with other styling properties to achieve the desired look and feel within the overall design of the page.
+     */
+    fill?: boolean;
+
+    /**
+     * When true, the bar component will align itself to the bottom of the container. This is typically used when the bar is intended to serve as a footer or to create a visual anchor at the bottom of a section, helping to ground the design and provide a sense of stability within the layout.
+     */
+    bottom?: boolean;
+
+    /**
+     * When true, the bar component will lock itself to the bottom of the container, preventing it from moving even if the content above it changes. This is useful for creating a fixed footer or a persistent visual element at the bottom of the layout.
+     */
+    lockBottom?: boolean;
+
+    /**
+     * When true, the bar will have dividers on both the top and bottom edges. This can be used to create a more defined separation between the bar and the content above and below it, enhancing the visual structure of the layout and making it easier for users to distinguish different sections of content.
+     */
+    bothDivider?: boolean;
+
+    /**
+     * When true, the bar will have a divider on the left edge. This can be used to create a visual separation between the bar and adjacent content on the left side, helping to define the boundaries of the bar and enhance the overall layout.
+     */
+    leftDivider?: boolean;
+}
+
+const {
+    color,
+    u,
+    spacer,
+    doubleSpacer,
+    leftSpace,
+    leftDoubleSpace,
+    rightSpace,
+    rightDoubleSpace,
+    horizontal,
+    leftEnd,
+    rightEnd,
+    decorated,
+    fill,
+    bottom,
+    lockBottom,
+    bothDivider,
+    leftDivider,
+    ...props
+} = Astro.props;
+---
+
+<div
+    {...props}
+    class:list={[
+        "lcars-bar",
+        color && `lcars-${color}-bg`,
+        u && `lcars-u-${u}`,
+        spacer && "spacer",
+        doubleSpacer && "double-spacer",
+        leftSpace && "left-space",
+        leftDoubleSpace && "left-double-space",
+        rightSpace && "right-space",
+        rightDoubleSpace && "right-double-space",
+        horizontal && "horizontal",
+        leftEnd && "left-end",
+        rightEnd && "right-end",
+        decorated && "decorated",
+        fill && "fill",
+        bottom && "bottom",
+        lockBottom && "lock-bottom",
+        bothDivider && "both-divider",
+        leftDivider && "left-divider",
+    ]}
+>
+    <slot />
+</div>

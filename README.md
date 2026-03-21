@@ -73,6 +73,29 @@ import { Font } from "astro:assets";
 </html>
 ```
 
+### Astro Components
+
+These components will be available as part of the `@withstudiocms/lcars-stylus/astro/...` exports
+
+- `components/`
+  - `Bar.astro` - Used to fill spaces and to create top or bottom horizontal bars.
+  - `BarTitle.astro` - Used to add a title to a bar.
+  - `Bracket.astro` - Decorative Brackets. Use to group elements.
+  - `Column.astro` - Creates a column layout.
+  - `DataTable.astro` - Simple, two-dimensional tabularly structured data display.
+  - `Divider.astro` - Create a divider on the page.
+  - `Elbow.astro` - The iconic LCARS frame elbow.
+  - `LElement.astro` - Elements (Known as `LElements` short for "LCARS Element") are the basic blocks of LCARS. They can be used as buttons and indicators. Use the grid classes to set the size. The html "div" is typically the preferred tag to assign the lcars-element tag to.
+  - `Row.astro` - Creates a row layout.
+  - `TextBox.astro` - A display-only text box with pre-defined font sizes. Use to fit headers and indicators, but not for large texts. **Also not for text inputs**.
+- `layouts/`
+  - `Basic.astro` - The Basic/Classic single frame LCARS Layout for Astro.
+  - `Voyager.astro` - A Voyager era inspired LCARS layout for Astro.
+- `utility/`
+  - `LCARSAudio.astro` - UI Audio controller
+  - `LCARSColorFix.astro` - UI Dark/light text color fixer, Makes text color white or black depending on background color.
+  - `LCARSLoading.astro` - A simple loading screen that can be displayed on top as an overlay during transitions, or while waiting for something.
+
 ### Checkout the Example project for usage examples
 
 Checkout the main Example theme built with Astro for how to work with this project.
