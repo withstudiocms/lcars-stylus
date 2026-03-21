@@ -1,5 +1,4 @@
 ---
-import { ComponentProps } from 'astro/types';
 import Bar from '../components/Bar.astro';
 import BarTitle from '../components/BarTitle.astro';
 import Column from '../components/Column.astro';
@@ -7,23 +6,10 @@ import DataTable from '../components/DataTable.astro';
 import Elbow from '../components/Elbow.astro';
 import LElement from '../components/LElement.astro';
 import Row from '../components/Row.astro';
-import { CopyrightTagline, HorizontalPositions, NavigationItem } from '../types';
 import { LCARSAudio, LCARSLoading, LCARSColorFix } from '../utility';
+import { SharedLayoutProps } from './shared';
 
-
-interface Props {
-    siteTitle: string;
-    key: string;
-    navigation: NavigationItem[];
-    copyright: CopyrightTagline;
-    titlePosition?: HorizontalPositions;
-    externalLink?: {
-        text: string;
-        href: string;
-    }
-    audioConfig?: ComponentProps<typeof LCARSAudio>;
-    loadingConfig?: ComponentProps<typeof LCARSLoading>;
-}
+interface Props extends SharedLayoutProps {}
 
 const { siteTitle, key, navigation, copyright, externalLink, audioConfig, loadingConfig, titlePosition = "left" } = Astro.props;
 
